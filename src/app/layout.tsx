@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Next.js Conf Colombo Watch Party",
+    title: "Next.js Conf 25 Colombo Watch Party",
     description:
         "Register your interest in the Next.js Conf 2025 Colombo watch party hosted by Vercel.",
 };
