@@ -185,7 +185,7 @@ export default function HomePage() {
                                         height="900"
                                         frameBorder="0"
                                         style={{
-                                            border: "1px solid #bfcbda88",
+                                            border: "2px solid #bfcbda88",
                                             borderRadius: "4px",
                                         }}
                                         allow="fullscreen; payment"
