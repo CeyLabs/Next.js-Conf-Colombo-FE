@@ -90,7 +90,7 @@ export default function HomePage() {
                                 id="registration-success-title"
                                 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl"
                             >
-                                Thanks for registering
+                                Thanks for registering!
                             </h2>
                             <p
                                 id="registration-success-description"
