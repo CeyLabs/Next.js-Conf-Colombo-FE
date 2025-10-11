@@ -97,6 +97,47 @@ export default function HomePage() {
             <Header />
 
             <main className="relative min-h-screen">
+                {/* BACKGROUND LAYERS */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                    {/* Soft radial glows (accent) */}
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            background:
+                                "radial-gradient(60% 50% at 50% 0%, rgba(99,102,241,0.18) 0%, rgba(99,102,241,0.05) 35%, transparent 60%), radial-gradient(40% 35% at 85% 65%, rgba(16,185,129,0.12) 0%, transparent 60%), radial-gradient(50% 40% at 15% 70%, rgba(14,165,233,0.12) 0%, transparent 60%)",
+                        }}
+                    ></div>
+
+                    {/* Grid + dots layer with responsive spacing */}
+                    <div
+                        className="absolute inset-0"
+                        style={
+                            {
+                                backgroundImage:
+                                    "radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+                                backgroundSize:
+                                    "calc(clamp(36px, 6vw, 64px) / 2) calc(clamp(36px, 6vw, 64px) / 2), clamp(36px, 6vw, 64px) clamp(36px, 6vw, 64px), clamp(36px, 6vw, 64px) clamp(36px, 6vw, 64px)",
+                                backgroundPosition: "center",
+                                maskImage:
+                                    "radial-gradient(80% 70% at 50% 35%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0) 100%)",
+                                WebkitMaskImage:
+                                    "radial-gradient(80% 70% at 50% 35%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0) 100%)",
+                            } as React.CSSProperties
+                        }
+                    ></div>
+
+                    {/* Vignette and subtle borders */}
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            background:
+                                "radial-gradient(120% 90% at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%)",
+                        }}
+                    ></div>
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                </div>
+
                 <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
                         <section className="lg:col-span-7">
@@ -121,12 +162,12 @@ export default function HomePage() {
                             </p>
 
                             <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-                                <div className="rounded-xl border border-white/10 bg-neutral-950/60 p-4">
+                                <div className="rounded-xl border border-white/10 bg-black/20 p-4 backdrop-blur-sm">
                                     <div className="flex items-center gap-2 text-sm text-neutral-400">
                                         <MapPinIcon className="h-4 w-4" />
                                         <span>Where:</span>
                                     </div>
-                                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0a0a0a] p-4">
+                                    <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
                                         <div className="flex items-start justify-between">
                                             <div>
                                                 <p className="text-base font-medium text-white">
@@ -141,12 +182,12 @@ export default function HomePage() {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-white/10 bg-neutral-950/60 p-4">
+                                <div className="rounded-xl border border-white/10 bg-black/20 p-4 backdrop-blur-sm">
                                     <div className="flex items-center gap-2 text-sm text-neutral-400">
                                         <CalendarIcon className="h-4 w-4" />
                                         <span>When:</span>
                                     </div>
-                                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0a0a0a] p-4">
+                                    <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
                                         <p className="text-base text-white">
                                             Wednesday, Oct 22, 2025 at 8:30 PM Sri Lanka Time
                                         </p>
@@ -154,7 +195,7 @@ export default function HomePage() {
                                 </div>
                             </div>
 
-                            <div className="mt-10 rounded-xl border border-white/10 bg-neutral-950/60 p-6">
+                            <div className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
                                 <h3 className="text-lg font-semibold tracking-tight text-white">
                                     Agenda:
                                 </h3>
@@ -173,27 +214,21 @@ export default function HomePage() {
                         </section>
 
                         <aside className="lg:col-span-5">
-                            <div className="sticky top-6 rounded-xl border border-white/10 bg-[#0a0a0a] p-6 lg:p-7">
-                                <h2 className="text-xl font-semibold tracking-tight text-white">
-                                    Register interest
-                                </h2>
-
-                                <div className="mt-6">
-                                    <iframe
-                                        src="https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple"
-                                        width="100%"
-                                        height="900"
-                                        frameBorder="0"
-                                        style={{
-                                            border: "2px solid #bfcbda88",
-                                            borderRadius: "4px",
-                                        }}
-                                        allow="fullscreen; payment"
-                                        aria-hidden="false"
-                                        tabIndex={0}
-                                        className="w-full"
-                                    ></iframe>
-                                </div>
+                            <div className="sticky top-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
+                                <iframe
+                                    src="https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple"
+                                    width="100%"
+                                    height="900"
+                                    frameBorder="0"
+                                    style={{
+                                        border: "1px solid #bfcbda88",
+                                        borderRadius: "12px",
+                                    }}
+                                    allow="fullscreen; payment"
+                                    aria-hidden="false"
+                                    tabIndex={0}
+                                    className="w-full"
+                                ></iframe>
                             </div>
                         </aside>
                     </div>
