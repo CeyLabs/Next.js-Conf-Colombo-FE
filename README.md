@@ -1,4 +1,4 @@
-# CeyLabs Next.js Starter Template
+# Next Conf Landing
 
 This is our standard Next.js project structure and setup guidelines. Follow these to ensure consistency across our projects.
 
