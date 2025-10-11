@@ -12,12 +12,12 @@ As a USER who PRECONDITIONS, I want to DO_THING so I can ACCOMPLISH_GOAL.
 
 ## Acceptance Criteria
 
--   [ ] AC1
--   [ ] AC2
+- [ ] AC1
+- [ ] AC2
 
 ## Assets
 
--   Mockup:
+- Mockup:
 
 ## EXTRA NOTES
 

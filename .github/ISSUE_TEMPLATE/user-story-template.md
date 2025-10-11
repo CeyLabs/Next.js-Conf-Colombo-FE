@@ -12,16 +12,16 @@ As a USER who PRECONDITIONS, I want to DO_THING so I can ACCOMPLISH_GOAL.
 
 ## Acceptance Criteria
 
--   [ ] AC1
--   [ ] AC2
+- [ ] AC1
+- [ ] AC2
 
 ## Task(s)
 
--   [ ] Linked Task Issue #1
--   [ ] Linked Task Issue #2
+- [ ] Linked Task Issue #1
+- [ ] Linked Task Issue #2
 
 ## Assets
 
--   Mockup:
+- Mockup:
 
 ## EXTRA NOTES

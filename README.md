@@ -54,18 +54,18 @@ bun run build
 
 ## Use conventional commit messages:
 
--   `feat`: for new features
--   `fix`: for bug fixes
--   `docs`: for documentation changes
--   `style`: for formatting changes
--   `refactor`: for code refactoring
--   `test`: for adding or modifying tests
--   `chore`: for maintenance tasks
+- `feat`: for new features
+- `fix`: for bug fixes
+- `docs`: for documentation changes
+- `style`: for formatting changes
+- `refactor`: for code refactoring
+- `test`: for adding or modifying tests
+- `chore`: for maintenance tasks
 
 ## Create Pull Requests:
 
--   Create a new branch for each feature or fix
--   Submit a pull request for review before merging to the main branch
+- Create a new branch for each feature or fix
+- Submit a pull request for review before merging to the main branch
 
 ## Project Structure
 
