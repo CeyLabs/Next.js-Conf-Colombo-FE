@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import {
     MapPinIcon,
     BuildingIcon,
@@ -13,15 +15,107 @@ import {
     XIcon,
     LinkedinIcon,
 } from "@/components/ui/icons";
+import { Toaster, toast } from "sonner";
 
 const agendaItems = [
-    "Registration & networking",
-    "Next.js Conf keynote live stream",
-    "evening snacks and refreshment",
+    "The full Next.js Conf 2025 Livestream, direct from San Francisco.",
+    "High-energy networking with the best in our tech community.",
+    "Fun quizzes with official Next.js swag to be won",
+];
+
+const communityPartners = [
+    {
+        name: "AIESEC Sri Lanka",
+        src: "/assets/partners/AIESEC - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "Rotaract",
+        src: "/assets/partners/Rotaract - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "GenALPHA",
+        src: "/assets/partners/GenALPHA - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "STEMLink",
+        src: "/assets/partners/STEMLink - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "Young Founders Network",
+        src: "/assets/partners/YFN - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "TechTalk360",
+        src: "/assets/partners/TechTalk360 - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "Hackathons.lk",
+        src: "/assets/partners/HackAthons.lk - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "CodeChefs",
+        src: "/assets/partners/Codechefs - Next.js Conf_Community Partners.svg",
+    },
+    {
+        name: "Creators",
+        src: "/assets/partners/Creators - Next.js Conf_Community Partners.svg",
+    },
+];
+
+const faqs = [
+    {
+        question: 'What exactly is a "Watch Party"?',
+        answer: "It's a community-first event where we'll watch the live-streamed keynotes from San Francisco together on a big screen. It's a chance for live reactions, discussions, and high-energy networking with fellow enthusiasts.",
+    },
+    {
+        question: "Why should I attend instead of just watching the stream at home?",
+        answer: "This is more than just a livestream. It's an opportunity to network with the best in Sri Lanka's tech scene, feel the collective energy of the community, and be part of the official launch of the 'Sri Lankan Next.js Community'.",
+    },
+    {
+        question: "Will there be food and drinks?",
+        answer: "Yes, food and beverages will be provided to keep you energized throughout the event.",
+    },
+    {
+        question: "What kind of prizes can I win?",
+        answer: "Thanks to our partnership with the global Next.js and Vercel team, you'll have the chance to win exclusive, Official Next.js and Vercel merchandise.",
+    },
+    {
+        question: "Who is this event for?",
+        answer: "This event is for the entire Next.js and developer community: from passionate students and developers to tech leads, startup CTOs, and founders. If you love building on the web, this is for you.",
+    },
 ];
 
 export default function HomePage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    const toggleFaq = (index: number) => {
+        setOpenFaqIndex((current) => (current === index ? null : index));
+    };
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkIsMobile();
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => window.removeEventListener("resize", checkIsMobile);
+    }, []);
+
+    const partnerLoop = [...communityPartners, ...communityPartners];
+
+    useEffect(() => {
+        toast("Only 100 Early bird 🚀 Tickets available!", {
+            duration: Infinity,
+            action: {
+                label: "Get tickets",
+                onClick: () => window.open("https://luma.com/2kqylm3u?from=embed", "_blank"),
+            },
+        });
+    }, []);
 
     if (isSubmitted) {
         return (
@@ -140,25 +234,38 @@ export default function HomePage() {
 
                 <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-                        <section className="lg:col-span-7">
+                        <section className="p-4 lg:col-span-7">
                             <p className="text-sm leading-relaxed text-neutral-400">
                                 Wednesday, Oct 22, 2025 <span className="text-neutral-500">at</span>{" "}
-                                <span className="text-neutral-300">8:30 PM Sri Lanka Time</span>
+                                <span className="text-neutral-300">7:00 PM Sri Lanka Time</span>
                             </p>
 
-                            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                                Next.js Conf Colombo Watch Party
-                            </h1>
+                            <div className="mt-3 flex justify-start motion-safe:animate-[hero-slide-in_0.75s_ease-out]">
+                                <Image
+                                    src="/assets/Next.js Conf - Hero Title.svg"
+                                    alt="Next.js Conf 2025 Colombo Watch Party"
+                                    width={600}
+                                    height={150}
+                                    className="h-auto w-full max-w-xl"
+                                    priority
+                                    unoptimized
+                                />
+                            </div>
 
-                            <p className="mt-4 text-lg text-neutral-300">
+                            <p className="text-md mt-4 font-semibold text-white">
                                 Join us in Colombo to hear the latest on Next.js
                             </p>
 
                             <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-400">
-                                Next.js Conf 25 is here. Register your interest today for the chance
-                                to join the local community of developers and leaders in Colombo for
-                                an evening of cutting-edge insights, education, and networking as we
-                                build a better web together.
+                                We&apos;re proud to put Sri Lanka on the global map as the 3rd
+                                Official Watch Party, right alongside London and Berlin for Next.js
+                                Conf 2025.
+                            </p>
+
+                            <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-400">
+                                Join us to celebrate the Next.js/Vercel ecosystem and connect with
+                                the best in our community. Let&apos;s show the world the passion of
+                                Sri Lankan builders!
                             </p>
 
                             <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -189,15 +296,18 @@ export default function HomePage() {
                                     </div>
                                     <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
                                         <p className="text-base text-white">
-                                            Wednesday, Oct 22, 2025 at 8:30 PM Sri Lanka Time
+                                            Wednesday, Oct 22, 2025 | 7:00 PM - 4.00 AM SL Time
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
+                            <div
+                                id="agenda"
+                                className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm"
+                            >
                                 <h3 className="text-lg font-semibold tracking-tight text-white">
-                                    Agenda:
+                                    What to expect
                                 </h3>
                                 <ul className="mt-4 space-y-3 text-sm text-neutral-300">
                                     {agendaItems.map((item) => (
@@ -208,8 +318,106 @@ export default function HomePage() {
                                     ))}
                                 </ul>
                                 <p className="mt-5 text-sm text-neutral-400">
-                                    Stay tuned as speakers are announced.
+                                    Register to access the detailed agenda!
                                 </p>
+                                <div className="mt-4">
+                                    <Button
+                                        asChild
+                                        variant="outline"
+                                        size="sm"
+                                        className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+                                    >
+                                        <a
+                                            href="https://luma.com/2kqylm3u?from=embed"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Register
+                                        </a>
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <div className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
+                                <div className="gap-4 sm:flex sm:items-center sm:justify-between">
+                                    <h3 className="text-lg font-semibold tracking-tight text-white">
+                                        Community Partners
+                                    </h3>
+                                    <p className="mt-2 text-sm text-neutral-400 sm:mt-0">
+                                        Our very own ambassadors of real-impact
+                                    </p>
+                                </div>
+                                <div className="relative mt-6 overflow-hidden rounded-xl border border-white/10 bg-black/30">
+                                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-black via-black/80 to-transparent sm:w-16 md:w-24"></div>
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-black via-black/80 to-transparent sm:w-16 md:w-24"></div>
+                                    <div className="flex min-w-max animate-[partners-scroll_24s_linear_infinite] items-center gap-1 px-4 py-6">
+                                        {partnerLoop.map((partner, index) => (
+                                            <div
+                                                key={`${partner.name}-${index}`}
+                                                className="flex w-[160px] flex-shrink-0 items-center justify-center"
+                                            >
+                                                <Image
+                                                    src={partner.src}
+                                                    alt={partner.name}
+                                                    width={200}
+                                                    height={100}
+                                                    className="h-14 w-auto"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                id="faq"
+                                className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm"
+                            >
+                                <h3 className="text-lg font-semibold tracking-tight text-white">
+                                    Frequently Asked Questions
+                                </h3>
+                                <div className="mt-4 space-y-4">
+                                    {faqs.map((faq, index) => {
+                                        const isOpen = openFaqIndex === index;
+                                        return (
+                                            <div
+                                                key={faq.question}
+                                                className="overflow-hidden rounded-lg border border-white/10 bg-black/30"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    onClick={() => toggleFaq(index)}
+                                                    aria-expanded={isOpen}
+                                                    className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left transition hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                                >
+                                                    <span className="text-base font-medium text-white">
+                                                        {faq.question}
+                                                    </span>
+                                                    <span
+                                                        className={`flex h-6 w-6 items-center justify-center rounded-full border border-white/10 text-sm text-neutral-200 transition-transform ${
+                                                            isOpen ? "rotate-45" : ""
+                                                        }`}
+                                                        aria-hidden="true"
+                                                    >
+                                                        +
+                                                    </span>
+                                                </button>
+                                                <div
+                                                    className={`px-4 pb-4 text-sm text-neutral-300 transition-[max-height,opacity] duration-300 ease-in-out ${
+                                                        isOpen
+                                                            ? "max-h-96 opacity-100"
+                                                            : "max-h-0 opacity-0"
+                                                    }`}
+                                                    aria-hidden={!isOpen}
+                                                >
+                                                    <p className="mt-2 whitespace-pre-line">
+                                                        {faq.answer}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </section>
 
@@ -236,6 +444,17 @@ export default function HomePage() {
 
                 <Footer />
             </main>
+            <Toaster
+                position={isMobile ? "bottom-center" : "top-center"}
+                theme="dark"
+                toastOptions={{
+                    style: {
+                        maxWidth: "700px",
+                        fontSize: "14px",
+                    },
+                    closeButton: true,
+                }}
+            />
         </div>
     );
 }
