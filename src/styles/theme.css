@@ -53,6 +53,15 @@
             height: 0;
         }
     }
+
+    @keyframes partners-scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
 }
 
 @utility container {

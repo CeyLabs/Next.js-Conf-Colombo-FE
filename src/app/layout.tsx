@@ -8,9 +8,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Next.js Conf 25 Colombo Watch Party",
+    title: "Next.js Conf '25 - Colombo Watch Party",
     description:
-        "Register your interest in the Next.js Conf 2025 Colombo watch party hosted by Vercel.",
+        "Join us to celebrate the Next.js/Vercel ecosystem and connect with the best in our community.",
+    openGraph: {
+        images: [
+            {
+                url: "/assets/Next.js Conf '25 - Social Preview.svg",
+                width: 1200,
+                height: 630,
+                alt: "Next.js Conf '25 - Colombo Watch Party",
+            },
+        ],
+    },
 };
 
 export default function RootLayout({
