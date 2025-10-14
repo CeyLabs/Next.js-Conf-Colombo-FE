@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     openGraph: {
         images: [
             {
-                url: "/assets/Next.js Conf '25 - Social Preview.svg",
+                url: "/assets/Next.js Conf '25 - Social Preview.png",
                 width: 1200,
                 height: 630,
                 alt: "Next.js Conf '25 - Colombo Watch Party",
