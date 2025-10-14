@@ -8,6 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://nextconfcolombo.vercel.app/"),
     title: "Next.js Conf '25 - Colombo Watch Party",
     description:
         "Join us to celebrate the Next.js/Vercel ecosystem and connect with the best in our community.",
