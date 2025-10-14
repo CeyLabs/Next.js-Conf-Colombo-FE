@@ -147,7 +147,7 @@ export default function HomePage() {
                             <div className="mt-10 inline-flex items-center gap-3 rounded-full border border-white/15 bg-neutral-950/60 px-5 py-3">
                                 <button
                                     type="button"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
                                     aria-label="Copy registration link"
                                 >
                                     <LinkIcon className="h-5 w-5 text-white" />
@@ -156,7 +156,7 @@ export default function HomePage() {
                                     href="https://vercel.com"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
                                     aria-label="Visit Vercel"
                                 >
                                     <TriangleIcon className="h-5 w-5 text-white" />
@@ -164,7 +164,7 @@ export default function HomePage() {
                                 <button
                                     type="button"
                                     onClick={() => setIsSubmitted(false)}
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
                                     aria-label="Close confirmation"
                                 >
                                     <XIcon className="h-5 w-5 text-white" />
@@ -173,7 +173,7 @@ export default function HomePage() {
                                     href="https://www.linkedin.com/company/vercel/"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
                                     aria-label="Share on LinkedIn"
                                 >
                                     <LinkedinIcon className="h-5 w-5 text-white" />
@@ -236,8 +236,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
                         <section className="p-4 lg:col-span-7">
                             <p className="text-sm leading-relaxed text-neutral-400">
-                                Wednesday, Oct 22, 2025 <span className="text-neutral-500">at</span>{" "}
-                                <span className="text-neutral-300">7:00 PM Sri Lanka Time</span>
+                                Wednesday, Oct 22, 2025 | 7:00 PM - 4.00 AM SL Time
                             </p>
 
                             <div className="mt-3 flex justify-start motion-safe:animate-[hero-slide-in_0.75s_ease-out]">
@@ -246,9 +245,10 @@ export default function HomePage() {
                                     alt="Next.js Conf 2025 Colombo Watch Party"
                                     width={600}
                                     height={150}
-                                    className="h-auto w-full max-w-xl"
+                                    className="h-auto w-full max-w-xl select-none"
                                     priority
                                     unoptimized
+                                    draggable={false}
                                 />
                             </div>
 
@@ -382,19 +382,19 @@ export default function HomePage() {
                                         return (
                                             <div
                                                 key={faq.question}
-                                                className="overflow-hidden rounded-lg border border-white/10 bg-black/30"
+                                                className="rounded-lg border border-white/10 bg-black/30"
                                             >
                                                 <button
                                                     type="button"
                                                     onClick={() => toggleFaq(index)}
                                                     aria-expanded={isOpen}
-                                                    className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left transition hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
+                                                    className="flex min-h-14 w-full items-start justify-between gap-4 px-4 py-3 text-left transition hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
                                                 >
-                                                    <span className="text-base font-medium text-white">
+                                                    <span className="min-w-0 flex-1 text-base font-medium text-white">
                                                         {faq.question}
                                                     </span>
                                                     <span
-                                                        className={`flex h-6 w-6 items-center justify-center rounded-full border border-white/10 text-sm text-neutral-200 transition-transform ${
+                                                        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 text-sm text-neutral-200 transition-transform ${
                                                             isOpen ? "rotate-45" : ""
                                                         }`}
                                                         aria-hidden="true"
@@ -403,7 +403,7 @@ export default function HomePage() {
                                                     </span>
                                                 </button>
                                                 <div
-                                                    className={`px-4 pb-4 text-sm text-neutral-300 transition-[max-height,opacity] duration-300 ease-in-out ${
+                                                    className={`overflow-hidden px-4 pb-4 text-sm text-neutral-300 transition-[max-height,opacity] duration-300 ease-in-out ${
                                                         isOpen
                                                             ? "max-h-96 opacity-100"
                                                             : "max-h-0 opacity-0"
@@ -421,8 +421,21 @@ export default function HomePage() {
                             </div>
 
                             <div className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
-                                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                                    <div className="flex-1">
+                                {/* Row layout by default so avatar sits left on mobile; on desktop, move avatar to the right */}
+                                <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                    {/* Avatar centered on mobile */}
+                                    <div className="flex-shrink-0 sm:order-2 sm:ml-auto">
+                                        <Image
+                                            src="/assets/tg-cover-nextjslk.jpeg"
+                                            alt="Next.js Sri Lanka Telegram Community"
+                                            width={96}
+                                            height={96}
+                                            className="rounded-full ring-1 ring-white/10"
+                                        />
+                                    </div>
+
+                                    {/* Text and button */}
+                                    <div className="text-center sm:order-1 sm:text-left">
                                         <h3 className="text-lg font-semibold tracking-tight text-white">
                                             Join our Telegram Community
                                         </h3>
@@ -446,15 +459,6 @@ export default function HomePage() {
                                                 </a>
                                             </Button>
                                         </div>
-                                    </div>
-                                    <div className="flex-shrink-0">
-                                        <Image
-                                            src="/assets/tg-cover-nextjslk.jpeg"
-                                            alt="Next.js Sri Lanka Telegram Community"
-                                            width={120}
-                                            height={120}
-                                            className="rounded-lg"
-                                        />
                                     </div>
                                 </div>
                             </div>
