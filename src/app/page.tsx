@@ -419,6 +419,45 @@ export default function HomePage() {
                                     })}
                                 </div>
                             </div>
+
+                            <div className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
+                                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                    <div className="flex-1">
+                                        <h3 className="text-lg font-semibold tracking-tight text-white">
+                                            Join our Telegram Community
+                                        </h3>
+                                        <p className="mt-2 text-sm text-neutral-400">
+                                            This is the Official Sri Lankan Next.js community linked
+                                            with the global Next.js/Vercel team
+                                        </p>
+                                        <div className="mt-4">
+                                            <Button
+                                                asChild
+                                                variant="outline"
+                                                size="sm"
+                                                className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+                                            >
+                                                <a
+                                                    href="https://t.me/NextjsLK"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Join Telegram
+                                                </a>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                    <div className="flex-shrink-0">
+                                        <Image
+                                            src="/assets/tg-cover-nextjslk.jpeg"
+                                            alt="Next.js Sri Lanka Telegram Community"
+                                            width={120}
+                                            height={120}
+                                            className="rounded-lg"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </section>
 
                         <aside className="lg:col-span-5">
