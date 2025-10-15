@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -91,7 +91,7 @@ const faqs = [
     },
 ];
 
-export default function HomePage() {
+function HomePageContent() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
@@ -118,7 +118,7 @@ export default function HomePage() {
 
     useEffect(() => {
         toast("Only 100 Early bird 🚀 Tickets available!", {
-            duration: 4000,
+            duration: 6000,
             action: {
                 label: "Get tickets",
                 onClick: () =>
@@ -512,7 +512,7 @@ export default function HomePage() {
                 <Footer />
             </main>
             <Toaster
-                position={isMobile ? "bottom-center" : "top-center"}
+                position={isMobile ? "bottom-center" : "bottom-left"}
                 theme="dark"
                 toastOptions={{
                     style: {
@@ -525,5 +525,13 @@ export default function HomePage() {
                 }}
             />
         </div>
+    );
+}
+
+export default function HomePage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <HomePageContent />
+        </Suspense>
     );
 }
