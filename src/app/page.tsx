@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import PromoBanner from "@/components/PromoBanner";
 import { Button } from "@/components/ui/button";
 import {
     MapPinIcon,
@@ -93,6 +95,9 @@ export default function HomePage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [showBanner, setShowBanner] = useState(true);
+    const searchParams = useSearchParams();
+    const coupon = searchParams.get("coupon");
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex((current) => (current === index ? null : index));
@@ -113,10 +118,14 @@ export default function HomePage() {
 
     useEffect(() => {
         toast("Only 100 Early bird 🚀 Tickets available!", {
-            duration: Infinity,
+            duration: 4000,
             action: {
                 label: "Get tickets",
-                onClick: () => window.open("https://luma.com/2kqylm3u?from=embed", "_blank"),
+                onClick: () =>
+                    window.open(
+                        "https://luma.com/2kqylm3u?from=embed&utm_source=nextconfcolombo-web&utm_medium=notification&utm_campaign=early-bird",
+                        "_blank"
+                    ),
             },
         });
     }, []);
@@ -192,6 +201,7 @@ export default function HomePage() {
 
     return (
         <div className="bg-black text-neutral-200">
+            <PromoBanner show={showBanner} onClose={() => setShowBanner(false)} />
             <Header />
 
             <main className="relative min-h-screen">
@@ -342,7 +352,7 @@ export default function HomePage() {
                                         className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
                                     >
                                         <a
-                                            href="https://luma.com/2kqylm3u?from=embed"
+                                            href="https://luma.com/2kqylm3u?utm_source=nextconfcolombo-web&utm_medium=cta&utm_campaign=main-page"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -481,7 +491,7 @@ export default function HomePage() {
                         <aside className="lg:col-span-5">
                             <div className="sticky top-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
                                 <iframe
-                                    src="https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple"
+                                    src={`https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple${coupon === "SULF2M" ? "?coupon=SULF2M" : ""}`}
                                     width="100%"
                                     height="900"
                                     frameBorder="0"
