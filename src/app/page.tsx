@@ -60,6 +60,10 @@ const communityPartners = [
         name: "Creators",
         src: "/assets/partners/Creators - Next.js Conf_Community Partners.svg",
     },
+    {
+        name: "Hatch",
+        src: "/assets/partners/Hatch - Next.js Conf_Community Partners.svg",
+    },
 ];
 
 const faqs = [
