@@ -491,7 +491,8 @@ function HomePageContent() {
                         <aside className="lg:col-span-5">
                             <div className="sticky top-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
                                 <iframe
-                                    src={`https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple${coupon === "SULF2M" ? "?coupon=SULF2M" : ""}`}
+                                    key={`iframe-${coupon === 'SULF2M' ? 'with-coupon' : 'without'}`}
+                                    src={`https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple${coupon === 'SULF2M' ? '?coupon=SULF2M' : ''}`}
                                     width="100%"
                                     height="900"
                                     frameBorder="0"
