@@ -193,6 +193,16 @@ export default function HomePage() {
             <main className="relative min-h-screen">
                 {/* BACKGROUND LAYERS */}
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                    {/* Background image */}
+                    <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                            backgroundImage: "url('/assets/Next.js Conf \\'25 - Cover.webp')",
+                            backgroundAttachment: "fixed",
+                            opacity: 0.4,
+                        }}
+                    ></div>
+
                     {/* Soft radial glows (accent) */}
                     <div
                         className="absolute inset-0"
@@ -232,7 +242,7 @@ export default function HomePage() {
                     <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                 </div>
 
-                <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
+                <div className="relative z-10 mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
                         <section className="p-4 lg:col-span-7">
                             <p className="text-sm leading-relaxed text-neutral-400">
@@ -245,7 +255,7 @@ export default function HomePage() {
                                     alt="Next.js Conf 2025 Colombo Watch Party"
                                     width={600}
                                     height={150}
-                                    className="h-auto w-full max-w-xl select-none"
+                                    className="h-auto w-full max-w-xl bg-transparent select-none"
                                     priority
                                     unoptimized
                                     draggable={false}
@@ -494,6 +504,8 @@ export default function HomePage() {
                     style: {
                         maxWidth: "700px",
                         fontSize: "14px",
+                        backdropFilter: "blur(10px)",
+                        background: "rgba(0, 0, 0, 0.5)",
                     },
                     closeButton: true,
                 }}
