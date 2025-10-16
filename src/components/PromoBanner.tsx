@@ -16,7 +16,7 @@ const PromoBanner = ({ show, onClose }: PromoBannerProps) => {
                     <p className="text-xs font-semibold text-white md:text-sm">
                         <span className="md:hidden">50% OFF for STEM Link Students!</span>
                         <span className="hidden md:inline">
-                            Get 50% OFF if you&apos;re a STEM Link Student!
+                            Get 50% off for STEM Link Bootcamp Learners
                         </span>
                     </p>
                     <Button
@@ -25,9 +25,13 @@ const PromoBanner = ({ show, onClose }: PromoBannerProps) => {
                         size="sm"
                         className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
                     >
-                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://stemlink.online/event/nextjs-watch-party?via=nextjsconfcolombo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <span className="text-xs md:hidden">Claim</span>
-                            <span className="hidden md:inline">Claim Discount</span>
+                            <span className="hidden md:inline">Learn More</span>
                         </a>
                     </Button>
                 </div>

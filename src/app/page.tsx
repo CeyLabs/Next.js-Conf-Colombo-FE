@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import PromoBanner from "@/components/PromoBanner";
+import { PromoCard } from "@/components/PromoCard";
 import { Button } from "@/components/ui/button";
 import {
     MapPinIcon,
@@ -91,13 +91,11 @@ const faqs = [
     },
 ];
 
-function HomePageContent() {
+export default function HomePage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [showBanner, setShowBanner] = useState(true);
-    const searchParams = useSearchParams();
-    const coupon = searchParams.get("coupon");
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex((current) => (current === index ? null : index));
@@ -390,11 +388,13 @@ function HomePageContent() {
                                             </div>
                                         ))}
                                     </div>
-                                </div>
                             </div>
+                        </div>
 
-                            <div
-                                id="faq"
+                        <PromoCard className="mt-10" />
+
+                        <div
+                            id="faq"
                                 className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm"
                             >
                                 <h3 className="text-lg font-semibold tracking-tight text-white">
@@ -491,8 +491,7 @@ function HomePageContent() {
                         <aside className="lg:col-span-5">
                             <div className="sticky top-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
                                 <iframe
-                                    key={`iframe-${coupon === 'SULF2M' ? 'with-coupon' : 'without'}`}
-                                    src={`https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple${coupon === 'SULF2M' ? '?coupon=SULF2M' : ''}`}
+                                    src="https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple"
                                     width="100%"
                                     height="900"
                                     frameBorder="0"
@@ -526,13 +525,5 @@ function HomePageContent() {
                 }}
             />
         </div>
-    );
-}
-
-export default function HomePage() {
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <HomePageContent />
-        </Suspense>
     );
 }
