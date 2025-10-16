@@ -5,6 +5,8 @@ import Image from "next/image";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import PromoBanner from "@/components/PromoBanner";
+import { PromoCard } from "@/components/PromoCard";
 import { Button } from "@/components/ui/button";
 import {
     MapPinIcon,
@@ -93,6 +95,7 @@ export default function HomePage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [showBanner, setShowBanner] = useState(true);
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex((current) => (current === index ? null : index));
@@ -113,10 +116,14 @@ export default function HomePage() {
 
     useEffect(() => {
         toast("Only 100 Early bird 🚀 Tickets available!", {
-            duration: Infinity,
+            duration: 6000,
             action: {
                 label: "Get tickets",
-                onClick: () => window.open("https://luma.com/2kqylm3u?from=embed", "_blank"),
+                onClick: () =>
+                    window.open(
+                        "https://luma.com/2kqylm3u?from=embed&utm_source=nextconfcolombo-web&utm_medium=notification&utm_campaign=early-bird",
+                        "_blank"
+                    ),
             },
         });
     }, []);
@@ -192,6 +199,7 @@ export default function HomePage() {
 
     return (
         <div className="bg-black text-neutral-200">
+            <PromoBanner show={showBanner} onClose={() => setShowBanner(false)} />
             <Header />
 
             <main className="relative min-h-screen">
@@ -342,7 +350,7 @@ export default function HomePage() {
                                         className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
                                     >
                                         <a
-                                            href="https://luma.com/2kqylm3u?from=embed"
+                                            href="https://luma.com/2kqylm3u?utm_source=nextconfcolombo-web&utm_medium=cta&utm_campaign=main-page"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -380,11 +388,13 @@ export default function HomePage() {
                                             </div>
                                         ))}
                                     </div>
-                                </div>
                             </div>
+                        </div>
 
-                            <div
-                                id="faq"
+                        <PromoCard className="mt-10" />
+
+                        <div
+                            id="faq"
                                 className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm"
                             >
                                 <h3 className="text-lg font-semibold tracking-tight text-white">
@@ -502,7 +512,7 @@ export default function HomePage() {
                 <Footer />
             </main>
             <Toaster
-                position={isMobile ? "bottom-center" : "top-center"}
+                position={isMobile ? "bottom-center" : "bottom-left"}
                 theme="dark"
                 toastOptions={{
                     style: {
