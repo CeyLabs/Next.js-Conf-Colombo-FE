@@ -66,6 +66,10 @@ const communityPartners = [
         name: "Hatch",
         src: "/assets/partners/Hatch - Next.js Conf_Community Partners.svg",
     },
+    {
+        name: "Graffon",
+        src: "/assets/partners/Graffon - Next.js Conf_Community Partners.svg",
+    },
 ];
 
 const faqs = [
@@ -388,13 +392,13 @@ export default function HomePage() {
                                             </div>
                                         ))}
                                     </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <PromoCard className="mt-10" />
+                            <PromoCard className="mt-10" />
 
-                        <div
-                            id="faq"
+                            <div
+                                id="faq"
                                 className="mt-10 rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm"
                             >
                                 <h3 className="text-lg font-semibold tracking-tight text-white">
