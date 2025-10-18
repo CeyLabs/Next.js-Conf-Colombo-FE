@@ -7,6 +7,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import PromoBanner from "@/components/PromoBanner";
 import { PromoCard } from "@/components/PromoCard";
+import EventCountdown, { SITE_CLOSE_TIME } from "@/components/EventCountdown";
+import SiteClosure from "@/components/SiteClosure";
 import { Button } from "@/components/ui/button";
 import {
     MapPinIcon,
@@ -16,6 +18,8 @@ import {
     TriangleIcon,
     XIcon,
     LinkedinIcon,
+    TelegramIcon,
+    GlobeIcon,
 } from "@/components/ui/icons";
 import { Toaster, toast } from "sonner";
 
@@ -100,10 +104,12 @@ const faqs = [
 ];
 
 export default function HomePage() {
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [showBanner, setShowBanner] = useState(true);
+
+    // Check if site should be closed (5 hours after event end)
+    const isSiteClosed = new Date() >= SITE_CLOSE_TIME;
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex((current) => (current === index ? null : index));
@@ -123,8 +129,8 @@ export default function HomePage() {
     const partnerLoop = [...communityPartners, ...communityPartners];
 
     useEffect(() => {
-        toast("Only 100 Early bird 🚀 Tickets available!", {
-            duration: 6000,
+        toast("Early bird ticket sale is over! Grab a General Entry ticket.", {
+            duration: 8000,
             action: {
                 label: "Get tickets",
                 onClick: () =>
@@ -136,73 +142,8 @@ export default function HomePage() {
         });
     }, []);
 
-    if (isSubmitted) {
-        return (
-            <div className="bg-black text-neutral-200">
-                <main
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby="registration-success-title"
-                    aria-describedby="registration-success-description"
-                    className="flex min-h-screen flex-col bg-black text-white"
-                >
-                    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 py-10 lg:px-8 lg:py-16">
-                        <div className="flex flex-1 flex-col items-center justify-center text-center">
-                            <h2
-                                id="registration-success-title"
-                                className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl"
-                            >
-                                Thanks for registering!
-                            </h2>
-                            <p
-                                id="registration-success-description"
-                                className="mt-6 max-w-xl text-base text-neutral-400 sm:text-lg"
-                            >
-                                Thanks for registering your interest in Next.js Conf Colombo Watch
-                                Party. A member of our team will be in touch shortly to confirm your
-                                place.
-                            </p>
-
-                            <div className="mt-10 inline-flex items-center gap-3 rounded-full border border-white/15 bg-neutral-950/60 px-5 py-3">
-                                <button
-                                    type="button"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
-                                    aria-label="Copy registration link"
-                                >
-                                    <LinkIcon className="h-5 w-5 text-white" />
-                                </button>
-                                <a
-                                    href="https://vercel.com"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
-                                    aria-label="Visit Vercel"
-                                >
-                                    <TriangleIcon className="h-5 w-5 text-white" />
-                                </a>
-                                <button
-                                    type="button"
-                                    onClick={() => setIsSubmitted(false)}
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
-                                    aria-label="Close confirmation"
-                                >
-                                    <XIcon className="h-5 w-5 text-white" />
-                                </button>
-                                <a
-                                    href="https://www.linkedin.com/company/vercel/"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="flex h-12 w-12 items-center justify-center rounded-full bg-black transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/20"
-                                    aria-label="Share on LinkedIn"
-                                >
-                                    <LinkedinIcon className="h-5 w-5 text-white" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        );
+    if (isSiteClosed) {
+        return <SiteClosure />;
     }
 
     return (
@@ -497,7 +438,8 @@ export default function HomePage() {
                         </section>
 
                         <aside className="lg:col-span-5">
-                            <div className="sticky top-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
+                            <EventCountdown />
+                            <div className="sticky top-6 mt-6 rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm">
                                 <iframe
                                     src="https://luma.com/embed/event/evt-F6SfVJFaWxVpx9H/simple"
                                     width="100%"
