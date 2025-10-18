@@ -70,6 +70,10 @@ const communityPartners = [
         name: "Graffon",
         src: "/assets/partners/Graffon - Next.js Conf_Community Partners.svg",
     },
+    {
+        name: "Trace",
+        src: "/assets/partners/Trace - Next.js Conf_Community Partners.svg",
+    },
 ];
 
 const faqs = [
