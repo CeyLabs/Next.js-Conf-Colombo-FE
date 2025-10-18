@@ -12,7 +12,6 @@ export default function EventCountdown() {
     // Event timing (Asia/Colombo, UTC+05:30)
     const EVENT_START = new Date("2025-10-22T19:00:00+05:30"); // Wednesday, Oct 22, 2025 | 7:00 PM
     const EVENT_END = new Date("2025-10-23T04:00:00+05:30"); // Thursday, Oct 23, 2025 | 4:00 AM
-    const SITE_CLOSE_TIME = new Date("2025-10-23T09:00:00+05:30"); // 5 hours after event end
 
     const [status, setStatus] = useState<EventStatus>("upcoming");
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -44,7 +43,9 @@ export default function EventCountdown() {
 
     return (
         <div
-            aria-live="polite"
+            role="timer"
+            aria-live="off"
+            aria-atomic={false}
             className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm"
         >
             {status === "upcoming" && (

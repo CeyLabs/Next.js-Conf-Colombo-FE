@@ -108,8 +108,18 @@ export default function HomePage() {
     const [isMobile, setIsMobile] = useState(false);
     const [showBanner, setShowBanner] = useState(true);
 
-    // Check if site should be closed (5 hours after event end)
-    const isSiteClosed = new Date() >= SITE_CLOSE_TIME;
+    // Reactive site-close flag (auto flips at SITE_CLOSE_TIME)
+    const [isSiteClosed, setIsSiteClosed] = useState(() => Date.now() >= SITE_CLOSE_TIME.getTime());
+    useEffect(() => {
+        if (isSiteClosed) return;
+        const ms = SITE_CLOSE_TIME.getTime() - Date.now();
+        if (ms <= 0) {
+            setIsSiteClosed(true);
+            return;
+        }
+        const t = setTimeout(() => setIsSiteClosed(true), ms);
+        return () => clearTimeout(t);
+    }, [isSiteClosed]);
 
     const toggleFaq = (index: number) => {
         setOpenFaqIndex((current) => (current === index ? null : index));

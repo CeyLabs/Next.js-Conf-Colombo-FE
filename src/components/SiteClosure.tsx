@@ -7,13 +7,7 @@ import { TelegramIcon } from "@/components/ui/icons";
 export default function SiteClosure() {
     return (
         <div className="bg-black text-neutral-200">
-            <main
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="site-closed-title"
-                aria-describedby="site-closed-description"
-                className="flex min-h-screen flex-col bg-black text-white"
-            >
+            <main className="flex min-h-screen flex-col bg-black text-white">
                 <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 py-10 lg:px-8 lg:py-16">
                     <div className="flex flex-1 flex-col items-center justify-center text-center">
                         <h2
