@@ -63,16 +63,7 @@ export default function EventCountdown() {
                         <TimeBox label="Minutes" value={timeLeft.minutes} />
                         <TimeBox label="Seconds" value={timeLeft.seconds} />
                     </div>
-                    <div className="mt-4 flex items-center justify-center gap-4">
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
-                        </div>
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <UserIcon className="h-4 w-4" />
-                            <span className="uppercase">In-person</span>
-                        </div>
-                    </div>
+                    <EventDetails />
                 </div>
             )}
 
@@ -91,16 +82,7 @@ export default function EventCountdown() {
                         <TimeBox label="Minutes" value={timeLeft.minutes} />
                         <TimeBox label="Seconds" value={timeLeft.seconds} />
                     </div>
-                    <div className="mt-4 flex items-center justify-center gap-4">
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
-                        </div>
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <UserIcon className="h-4 w-4" />
-                            <span className="uppercase">In-person</span>
-                        </div>
-                    </div>
+                    <EventDetails />
                 </div>
             )}
 
@@ -118,16 +100,7 @@ export default function EventCountdown() {
                             Thanks for joining us, Colombo. See you next year.
                         </p>
                     </div>
-                    <div className="mt-4 flex items-center justify-center gap-4">
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
-                        </div>
-                        <div className="flex items-center gap-2 font-mono text-xs text-white">
-                            <UserIcon className="h-4 w-4" />
-                            <span className="uppercase">In-person</span>
-                        </div>
-                    </div>
+                    <EventDetails />
                 </div>
             )}
         </div>
@@ -157,6 +130,22 @@ function TimeBox({ label, value }: { label: string; value: number }) {
             </div>
             <div className="mt-1 text-[10px] font-bold tracking-wide text-white uppercase">
                 {shortLabel}
+            </div>
+        </div>
+    );
+}
+
+// Component for event location and type details
+function EventDetails() {
+    return (
+        <div className="mt-4 flex items-center justify-center gap-4">
+            <div className="flex items-center gap-2 font-mono text-xs text-white">
+                <MapPinIcon className="h-4 w-4" />
+                <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
+            </div>
+            <div className="flex items-center gap-2 font-mono text-xs text-white">
+                <UserIcon className="h-4 w-4" />
+                <span className="uppercase">In-person</span>
             </div>
         </div>
     );
