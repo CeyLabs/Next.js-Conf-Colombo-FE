@@ -289,7 +289,7 @@ export default function HomePage() {
                                         <span>When:</span>
                                     </div>
                                     <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
-                                        <p className="text-base text-white">
+                                        <p className="text-base text-neutral-400">
                                             Wednesday, Oct 22, 2025 | 7:00 PM - 1:00 AM SL Time
                                         </p>
                                     </div>
