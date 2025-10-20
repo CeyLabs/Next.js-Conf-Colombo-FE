@@ -217,7 +217,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
                         <section className="p-4 lg:col-span-7">
                             <p className="text-sm leading-relaxed text-neutral-400">
-                                Wednesday, Oct 22, 2025 | 7:00 PM - 4.00 AM SL Time
+                                Wednesday, Oct 22, 2025 | 7:00 PM - 1:00 AM SL Time
                             </p>
 
                             <div className="mt-3 flex justify-start motion-safe:animate-[hero-slide-in_0.75s_ease-out]">
@@ -256,16 +256,29 @@ export default function HomePage() {
                                         <span>Where:</span>
                                     </div>
                                     <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
-                                        <div className="flex items-start justify-between">
+                                        <div className="flex items-center justify-between">
                                             <div>
-                                                <p className="text-base font-medium text-white">
-                                                    TBA
+                                                <a
+                                                    href="https://maps.app.goo.gl/1ziwuJ3wWSk5yQEZA"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-base font-medium text-white/90 transition-opacity hover:text-white"
+                                                >
+                                                    TRACE SRI LANKA | BAY 07
+                                                </a>
+                                                <p className="mt-1 text-sm text-neutral-400">
+                                                    AC19, Colombo 01000, Sri Lanka
                                                 </p>
-                                                <p className="mt-1 text-sm text-neutral-400"></p>
                                             </div>
-                                            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
-                                                <BuildingIcon className="h-4 w-4" />
-                                            </span>
+                                            <a
+                                                href="https://maps.app.goo.gl/1ziwuJ3wWSk5yQEZA"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-neutral-400 transition-opacity hover:text-white"
+                                                aria-label="Open location in Google Maps"
+                                            >
+                                                <BuildingIcon className="h-4 w-4 flex-shrink-0" />
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +290,7 @@ export default function HomePage() {
                                     </div>
                                     <div className="mt-3 rounded-xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
                                         <p className="text-base text-white">
-                                            Wednesday, Oct 22, 2025 | 7:00 PM - 4.00 AM SL Time
+                                            Wednesday, Oct 22, 2025 | 7:00 PM - 1:00 AM SL Time
                                         </p>
                                     </div>
                                 </div>

@@ -66,7 +66,7 @@ export default function EventCountdown() {
                     <div className="mt-4 flex items-center justify-center gap-4">
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">Colombo, LK</span>
+                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
                         </div>
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <UserIcon className="h-4 w-4" />
@@ -94,7 +94,7 @@ export default function EventCountdown() {
                     <div className="mt-4 flex items-center justify-center gap-4">
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">Colombo, LK</span>
+                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
                         </div>
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <UserIcon className="h-4 w-4" />
@@ -121,7 +121,7 @@ export default function EventCountdown() {
                     <div className="mt-4 flex items-center justify-center gap-4">
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <MapPinIcon className="h-4 w-4" />
-                            <span className="uppercase">Colombo, LK</span>
+                            <span className="uppercase">TRACE SRI LANKA | BAY 07</span>
                         </div>
                         <div className="flex items-center gap-2 font-mono text-xs text-white">
                             <UserIcon className="h-4 w-4" />
