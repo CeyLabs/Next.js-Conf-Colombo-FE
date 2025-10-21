@@ -412,8 +412,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         const container = containerRef.current;
         if (!container) return;
         speedRef.current = speed;
-        const needsReinitKeys = ["antialias", "liquid", "noiseAmount"];
-        const cfg = { antialias, liquid, noiseAmount };
+        const needsReinitKeys = ["antialias", "liquid", "noiseAmount", "globalEvents"];
+        const cfg = { antialias, liquid, noiseAmount, globalEvents };
         let mustReinit = false;
         if (!threeRef.current) mustReinit = true;
         else if (prevConfigRef.current) {
@@ -428,6 +428,13 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
                 const t = threeRef.current;
                 t.resizeObserver?.disconnect();
                 cancelAnimationFrame(t.raf!);
+                // Detach listeners before tearing down the context
+                if (t.eventTarget) {
+                    if (t.onPointerDown)
+                        t.eventTarget.removeEventListener("pointerdown", t.onPointerDown as any);
+                    if (t.onPointerMove)
+                        t.eventTarget.removeEventListener("pointermove", t.onPointerMove as any);
+                }
                 t.quad?.geometry.dispose();
                 t.material.dispose();
                 t.composer?.dispose();
@@ -448,6 +455,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
             renderer.domElement.style.width = "100%";
             renderer.domElement.style.height = "100%";
             renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            if (transparent) renderer.setClearAlpha(0);
+            else renderer.setClearColor(0x000000, 1);
             container.appendChild(renderer.domElement);
             const uniforms = {
                 uResolution: { value: new THREE.Vector2(0, 0) },
@@ -649,7 +658,6 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         }
         prevConfigRef.current = cfg;
         return () => {
-            if (threeRef.current && mustReinit) return;
             if (!threeRef.current) return;
             const t = threeRef.current;
             t.resizeObserver?.disconnect();
