@@ -110,6 +110,14 @@ export default function CommunityPulsePage() {
     const [isGenerating, setIsGenerating] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Cleanly reset copy state to avoid timeout leaks on unmount
+    useEffect(() => {
+        if (copyState !== "idle") {
+            const timer = window.setTimeout(() => setCopyState("idle"), 2000);
+            return () => window.clearTimeout(timer);
+        }
+    }, [copyState]);
+
     const shuffleSuggestions = () => {
         const pool = [...DEFAULT_CAPTIONS];
         for (let i = pool.length - 1; i > 0; i -= 1) {
@@ -162,8 +170,8 @@ export default function CommunityPulsePage() {
                 const chunk = decoder.decode(value, { stream: true });
                 accumulatedText += chunk;
                 setStreamingText(accumulatedText);
-                setActiveCaption(sanitizeCaption(accumulatedText));
             }
+            setActiveCaption(sanitizeCaption(accumulatedText));
 
             setIsFlipped(false);
         } catch (error) {
@@ -212,8 +220,8 @@ export default function CommunityPulsePage() {
                 const chunk = decoder.decode(value, { stream: true });
                 accumulatedText += chunk;
                 setStreamingText(accumulatedText);
-                setActiveCaption(sanitizeCaption(accumulatedText));
             }
+            setActiveCaption(sanitizeCaption(accumulatedText));
 
             setIsFlipped(true);
         } catch (error) {
@@ -226,18 +234,19 @@ export default function CommunityPulsePage() {
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(activeCaption);
+            // Copy what the user currently sees
+            await navigator.clipboard.writeText(displayedCaption);
             setCopyState("copied");
             fireConfetti();
         } catch (error) {
             console.error("Failed to copy caption", error);
             setCopyState("error");
-        } finally {
-            window.setTimeout(() => setCopyState("idle"), 2000);
         }
     };
 
-    const charCount = activeCaption.length;
+    // Show streaming text live while generating; show sanitized final otherwise
+    const displayedCaption = isGenerating && streamingText ? streamingText : activeCaption;
+    const charCount = displayedCaption.length;
 
     const encodedCaption = useMemo(() => encodeURIComponent(activeCaption), [activeCaption]);
 
@@ -312,7 +321,7 @@ export default function CommunityPulsePage() {
                             <div className="flex flex-col gap-4">
                                 <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-black/60 px-4 py-3">
                                     <textarea
-                                        value={activeCaption}
+                                        value={displayedCaption}
                                         onChange={(event) => setActiveCaption(event.target.value)}
                                         rows={5}
                                         className="min-h-[120px] w-full resize-none bg-transparent text-sm text-neutral-200 focus:outline-none"
@@ -437,7 +446,7 @@ export default function CommunityPulsePage() {
                                         rel="noopener noreferrer"
                                     >
                                         <Twitter className="h-4 w-4" />
-                                        Let the community know, share on X
+                                        Share to X
                                     </Link>
                                 </Button>
 
