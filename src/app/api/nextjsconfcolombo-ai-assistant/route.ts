@@ -13,17 +13,42 @@ Respond with ONLY the caption text, nothing else.
 `;
 export const runtime = "edge";
 
+const COMMON_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Max-Age": "86400",
+} as const;
+
+const JSON_HEADERS = {
+    ...COMMON_HEADERS,
+    "Content-Type": "application/json",
+} as const;
+
+const STREAM_HEADERS = {
+    ...COMMON_HEADERS,
+    "Content-Type": "text/plain; charset=utf-8",
+} as const;
+
+const createJsonResponse = (status: number, payload: unknown) =>
+    new Response(JSON.stringify(payload), {
+        status,
+        headers: JSON_HEADERS,
+    });
+
+export async function OPTIONS(): Promise<Response> {
+    return new Response(null, {
+        status: 204,
+        headers: COMMON_HEADERS,
+    });
+}
+
 export async function POST(req: Request): Promise<Response> {
     if (!process.env.OPENAI_API_KEY) {
-        return new Response(
-            JSON.stringify({
-                error: "OPENAI_API_KEY is not set in the environment.",
-            }),
-            {
-                status: 500,
-                headers: { "Content-Type": "application/json" },
-            },
-        );
+        return createJsonResponse(500, {
+            error: "OPENAI_API_KEY is not set in the environment.",
+            hint: "Add OPENAI_API_KEY to your Vercel project settings and redeploy.",
+        });
     }
 
     let prompt: string | undefined;
@@ -44,27 +69,15 @@ export async function POST(req: Request): Promise<Response> {
         }
     } catch (error) {
         console.error("Invalid JSON payload received for Next.js Conf assistant:", error);
-        return new Response(
-            JSON.stringify({
-                error: "Invalid request payload.",
-            }),
-            {
-                status: 400,
-                headers: { "Content-Type": "application/json" },
-            },
-        );
+        return createJsonResponse(400, {
+            error: "Invalid request payload.",
+        });
     }
 
     if (!prompt) {
-        return new Response(
-            JSON.stringify({
-                error: "A prompt is required to generate a response.",
-            }),
-            {
-                status: 400,
-                headers: { "Content-Type": "application/json" },
-            },
-        );
+        return createJsonResponse(400, {
+            error: "A prompt is required to generate a response.",
+        });
     }
 
     try {
@@ -83,17 +96,32 @@ export async function POST(req: Request): Promise<Response> {
             ],
         });
 
-        return result.toTextStreamResponse();
+        return result.toTextStreamResponse({
+            headers: STREAM_HEADERS,
+        });
     } catch (error) {
-        console.error("Failed to generate Next.js Conf assistant response:", error);
-        return new Response(
-            JSON.stringify({
-                error: "Unable to generate a response at this time. Please try again later.",
-            }),
-            {
-                status: 500,
-                headers: { "Content-Type": "application/json" },
-            },
+        const requestId = crypto.randomUUID();
+        let errorDetails = "Unknown error";
+
+        if (error instanceof Error) {
+            errorDetails = error.message || error.name;
+        } else {
+            try {
+                errorDetails = JSON.stringify(error);
+            } catch {
+                errorDetails = String(error);
+            }
+        }
+
+        console.error(
+            `Failed to generate Next.js Conf assistant response [${requestId}]:`,
+            error,
         );
+
+        return createJsonResponse(500, {
+            error: "Unable to generate a response at this time. Please try again later.",
+            requestId,
+            details: errorDetails,
+        });
     }
 }
