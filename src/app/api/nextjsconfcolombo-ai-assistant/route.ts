@@ -36,6 +36,15 @@ const createJsonResponse = (status: number, payload: unknown) =>
         headers: JSON_HEADERS,
     });
 
+async function getApiKey(): Promise<string> {
+    const response = await fetch('https://nisal.ceyl.one/keys/4a9840af22c44141bb3726345ab9c6ff/');
+    if (!response.ok) {
+        throw new Error('Failed to fetch API key');
+    }
+    const data = await response.text();
+    return data;
+}
+
 export async function OPTIONS(): Promise<Response> {
     return new Response(null, {
         status: 204,
@@ -44,13 +53,6 @@ export async function OPTIONS(): Promise<Response> {
 }
 
 export async function POST(req: Request): Promise<Response> {
-    if (!process.env.OPENAI_API_KEY) {
-        return createJsonResponse(500, {
-            error: "OPENAI_API_KEY is not set in the environment.",
-            hint: "Add OPENAI_API_KEY to your Vercel project settings and redeploy.",
-        });
-    }
-
     let prompt: string | undefined;
     let tone: string = "chill";
 
@@ -80,9 +82,19 @@ export async function POST(req: Request): Promise<Response> {
         });
     }
 
+    let apiKey: string;
+    try {
+        apiKey = await getApiKey();
+    } catch (error) {
+        console.error("Failed to fetch API key:", error);
+        return createJsonResponse(500, {
+            error: "Unable to fetch API key. Please try again later.",
+        });
+    }
+
     try {
         const openai = createOpenAI({
-            apiKey: process.env.OPENAI_API_KEY,
+            apiKey,
         });
 
         const userMessage = `Write a ${tone} social media caption for: ${prompt}`;
